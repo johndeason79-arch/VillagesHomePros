@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Find trusted plumbers, HVAC, electricians, roofers & handymen in The Villages, Florida. Golf-cart friendly pros with senior-friendly service.">
+    <title>Villages Home Pros • The Villages Florida Home Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .star { color: #fbbf24; }
+        .card { transition: all 0.3s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white">
+    <!-- NAV -->
+    <nav class="bg-black p-4 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-amber-400">Villages Home Pros</h1>
+            <div class="flex gap-6 text-sm">
+                <a href="#services" class="hover:text-amber-400">Services</a>
+                <a href="#list" class="hover:text-amber-400">Find Pros</a>
+                <a href="#featured" class="hover:text-amber-400">Featured</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="bg-gradient-to-r from-zinc-900 to-black py-20 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-5xl font-bold mb-4">Trusted Home Services in The Villages</h2>
+            <p class="text-xl text-zinc-400 mb-8">Golf-cart friendly • Senior-focused • Fast response</p>
+            <div class="max-w-md mx-auto">
+                <input id="searchInput" type="text" 
+                       placeholder="Search plumbers, AC repair, roofers..." 
+                       class="w-full p-4 rounded-2xl bg-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-400">
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES GRID -->
+    <section id="list" class="max-w-6xl mx-auto px-4 py-12">
+        <h3 class="text-3xl font-bold mb-8 text-center">Featured Home Service Pros</h3>
+        <div id="prosGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Listings populated by JS below -->
+        </div>
+    </section>
+
+    <!-- FEATURED / PAID SPOTS -->
+    <section id="featured" class="bg-zinc-900 py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-bold mb-6 text-center">Premium Spotlight Pros</h3>
+            <div class="text-center text-amber-400 text-sm">These spots are available for $99–$199/year — get instant leads</div>
+        </div>
+    </section>
+
+    <script>
+        const pros = [
+            {name: "Alamo AC & Heating", service: "HVAC / AC Repair", location: "The Villages", rating: 4.9, phone: "(352) 555-0123", desc: "Golf cart service • Same-day repairs • 20+ years"},
+            {name: "Villages Plumbing Pros", service: "Plumbing", location: "The Villages", rating: 4.8, phone: "(352) 555-0456", desc: "Emergency service • Leak detection • Senior discounts"},
+            {name: "Sunshine Electricians", service: "Electrical", location: "The Villages", rating: 5.0, phone: "(352) 555-0789", desc: "Ceiling fans • Outlets • Generator install"},
+            {name: "Florida Roof Masters", service: "Roofing", location: "The Villages", rating: 4.7, phone: "(352) 555-1122", desc: "Storm damage • Shingle & tile • Free inspections"},
+            {name: "Cart & Home Handyman", service: "Handyman & Golf Cart Repair", location: "The Villages", rating: 4.9, phone: "(352) 555-3344", desc: "Everything from shelves to golf cart fixes"},
+            {name: "BugBusters Pest Control", service: "Pest Control", location: "The Villages", rating: 4.6, phone: "(352) 555-5566", desc: "Monthly service • Termites • Ants"},
+        ];
+
+        function renderPros(filteredPros) {
+            const grid = document.getElementById('prosGrid');
+            grid.innerHTML = '';
+            filteredPros.forEach(pro => {
+                const div = document.createElement('div');
+                div.className = 'card bg-zinc-900 rounded-3xl p-6';
+                div.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-semibold text-xl">${pro.name}</h4>
+                            <p class="text-amber-400">${pro.service}</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="flex text-sm">${Array(Math.floor(pro.rating)).fill('<span class="star">★</span>').join('')}</div>
+                            <span class="text-xs text-zinc-500">${pro.rating}</span>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-zinc-400 text-sm">${pro.desc}</p>
+                    <p class="mt-4 text-xs text-zinc-500">${pro.location}</p>
+                    <a href="tel:${pro.phone}" class="block mt-6 text-center bg-amber-400 hover:bg-amber-500 text-black font-medium py-3 rounded-2xl text-sm">Call Now: ${pro.phone}</a>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        // Live search
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = pros.filter(p => 
+                p.name.toLowerCase().includes(term) || 
+                p.service.toLowerCase().includes(term) || 
+                p.desc.toLowerCase().includes(term)
+            );
+            renderPros(filtered.length ? filtered : pros);
+        });
+
+        // Initial render
+        renderPros(pros);
+    </script>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-8 text-center text-xs text-zinc-500">
+        Villages Home Pros © 2026 • Made with AI in minutes • All pros are independent
+    </footer>
+</body>
+</html>
