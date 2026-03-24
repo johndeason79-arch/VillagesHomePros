@@ -52,31 +52,4 @@
   <script>
     const listings = [
       { name: "Tint The Villages", category: "Home & Commercial Window Tinting", desc: "Residential windows • Commercial • Lifetime warranty • Local favorite", location: "The Villages", phone: "(352) 638-7828", rating: 5 },
-      { name: "Frank Gay Services", category: "HVAC / AC Repair / Plumbing / Electrical", desc: "AC repair • Plumbing • Electrical • 24/7 emergency", location: "The Villages", phone: "(407) 512-8102", rating: 4.9 },
-      { name: "The Village Handyman Service", category: "Handyman Services", desc: "All repairs • Painting • Drywall • Senior discounts", location: "The Villages", phone: "(352) 399-8146", rating: 4.8 },
-      { name: "Advanced Pool Care", category: "Pool Service & Repair", desc: "Weekly cleaning • Repairs • Chemical service", location: "The Villages", phone: "(352) 399-8331", rating: 4.9 },
-      { name: "The Solar Guys", category: "Solar Installation & Pool Heating", desc: "Solar panels • Tubular skylights • Solar pool heating", location: "The Villages", phone: "(352) 555-1122", rating: 5 },
-      { name: "BugBusters Pest Control", category: "Pest Control", desc: "Monthly service • Termites • Ants • Pet-safe", location: "The Villages", phone: "(352) 555-5566", rating: 4.7 },
-      { name: "Alamo AC & Heating", category: "HVAC / AC Repair", desc: "Golf cart service • Same-day repairs • 20+ years", location: "The Villages", phone: "(352) 555-0123", rating: 4.9 },
-      { name: "Villages Plumbing Pros", category: "Plumbing / Plumber", desc: "Emergency service • Leak detection • Senior discounts", location: "The Villages", phone: "(352) 555-0456", rating: 4.8 }
-    ];
-
-    function renderListings(filtered) {
-      const grid = document.getElementById('prosGrid');
-      grid.innerHTML = '';
-      filtered.forEach(l => {
-        const div = document.createElement('div');
-        div.className = 'card bg-zinc-900 p-6 rounded-3xl';
-        div.innerHTML = `
-          <h4 class="text-xl font-semibold">${l.name}</h4>
-          <p class="text-emerald-400">${l.category}</p>
-          <p class="text-zinc-400 text-sm mt-2">${l.desc}</p>
-          <p class="text-zinc-500 text-xs mt-4">${l.location}</p>
-          <button onclick="window.location='tel:${l.phone}'" class="mt-6 w-full bg-yellow-400 text-black font-bold py-3 rounded-2xl">Call Now: ${l.phone}</button>
-        `;
-        grid.appendChild(div);
-      });
-    }
-
-    function performSearch() {
-      const term = document.getElementBy
+      { name: "Frank
