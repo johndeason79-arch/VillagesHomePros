@@ -1,125 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content=<meta name="description" content="The Villages Florida Home Services Directory - Find trusted local pros for roofing, AC repair, plumbing, electrical, pool service & more. Call now for fast quotes in The Villages, FL.">
-    <title>Villages Home Pros • The Villages Florida Home Services Directory</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .star { color: #fbbf24; }
-        .card { transition: all 0.3s; }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="description" content="The Villages Florida Home Services Directory - Find trusted local pros for roofing, AC repair, plumbing, electrical, pool service & more. Call now for fast quotes in The Villages, FL.">
+  <title>Villages Home Pros • The Villages Florida Home Services Directory</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .star { color: #fbbf24; }
+    .card { transition: all 0.3s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+  </style>
 </head>
-<body class="bg-zinc-950 text-
-    <section class="bg-gradient-to-r from-zinc-900 to-black py-20 text-center">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-5xl font-bold mb-4">Trusted Home Services in The Villages</h2>
-            <p class="text-xl text-zinc-400 mb-8">Golf-cart friendly • Senior-focused • Fast response</p>
-            <div class="max-w-md mx-auto">
-                <input id="searchInput" type="text" placeholder="Search plumbers, AC, roofers, tint, solar, pool..." 
-                       class="w-full p-4 rounded-2xl bg-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-400">
-            </div><nav class="bg-black p-4 sticky top-0 z-50">
-  <div class="max-w-6xl mx-auto flex justify-between items-center">
-    <h1 class="text-3xl font-bold text-amber-400">Villages Home Pros</h1>
-    <div class="text-center mt-4">
-      <a href="get-listed.html" 
-         class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-2xl text-lg shadow">
-        Get Listed • Become Featured ($129/month)
-      </a>
+<body class="bg-zinc-950 text-white">
+  <!-- Header with single green button -->
+  <nav class="bg-black p-4 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-amber-400">Villages Home Pros</h1>
+      <div class="text-center mt-4">
+        <a href="get-listed.html" 
+           class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-2xl text-lg shadow">
+          Get Listed • Become Featured ($129/month)
+        </a>
+      </div>
     </div>
-  </div>
-</nav>
-        </div>
-    </section>
+  </nav>
 
-    <section id="list" class="max-w-6xl mx-auto px-4 py-12">
-        <h3 class="text-3xl font-bold mb-8 text-center">Featured Home Service Pros</h3>
-        <div id="prosGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    </section>
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-zinc-900 to-black py-20 text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-5xl font-bold mb-4">Trusted Home Services in The Villages</h2>
+      <p class="text-xl text-zinc-400 mb-8">Golf-cart friendly • Senior-focused • Fast response</p>
+      <input id="searchInput" type="text" placeholder="Search plumbers, AC, roofers, tint, solar, pool..." 
+             class="w-full max-w-md mx-auto p-4 rounded-2xl bg-zinc-800 text-white placeholder-zinc-500 focus:outline-none">
+    </div>
+  </section>
 
-    <section id="featured" class="bg-zinc-900 py-12">
-        <div class="max-w-6xl mx-auto px-4">
-            <h3 class="text-2xl font-bold mb-6 text-center">Premium Spotlight Pros</h3>
-            <div class="text-center text-amber-400 text-sm">These spots are available for $99–$199/year — get instant leads</div>
-        </div>
-    </section>
+  <!-- Featured listings -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h3 class="text-3xl font-bold mb-8 text-center">Featured Home Service Pros</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="prosGrid"></div>
+  </section>
 
-    <script>
-        const pros = [
-            {name: "Tint The Villages", service: "Home & Commercial Window Tinting", location: "The Villages", rating: 5.0, phone: "(352) 638-7828", desc: "Residential windows • Commercial • Lifetime warranty • Local favorite"},
-            {name: "Frank Gay Services", service: "HVAC / Plumbing / Electrical", location: "The Villages", rating: 4.9, phone: "(407) 512-8102", desc: "AC repair • Plumbing • Electrical • 24/7 emergency"},
-            {name: "The Village Handyman Service", service: "Handyman Services", location: "The Villages", rating: 4.8, phone: "(352) 399-8146", desc: "All repairs • Painting • Drywall • Senior discounts"},
-            {name: "Advanced Pool Care", service: "Pool Service & Repair", location: "The Villages", rating: 4.9, phone: "(352) 399-8331", desc: "Weekly cleaning • Repairs • Chemical service"},
-            {name: "The Solar Guys", service: "Solar Installation & Pool Heating", location: "The Villages", rating: 5.0, phone: "(352) 555-1122", desc: "Solar panels • Tubular skylights • Solar pool heating"},
-            {name: "BugBusters Pest Control", service: "Pest Control", location: "The Villages", rating: 4.7, phone: "(352) 555-5566", desc: "Monthly service • Termites • Ants • Pet-safe"},
-            {name: "Alamo AC & Heating", service: "HVAC / AC Repair", location: "The Villages", rating: 4.9, phone: "(352) 555-0123", desc: "Golf cart service • Same-day repairs • 20+ years"},
-            {name: "Villages Plumbing Pros", service: "Plumbing", location: "The Villages", rating: 4.8, phone: "(352) 555-0456", desc: "Emergency service • Leak detection • Senior discounts"},
-            {name: "Sunshine Electricians", service: "Electrical", location: "The Villages", rating: 5.0, phone: "(352) 555-0789", desc: "Ceiling fans • Outlets • Generator install"},
-            {name: "Florida Roof Masters", service: "Roofing", location: "The Villages", rating: 4.7, phone: "(352) 555-1122", desc: "Storm damage • Shingle & tile • Free inspections"},
-            {name: "Cart & Home Handyman", service: "Handyman & Golf Cart Repair", location: "The Villages", rating: 4.9, phone: "(352) 555-3344", desc: "Everything from shelves to golf cart fixes"},
-            {name: "Sunshine Solar Solutions", service: "Solar Installation", location: "The Villages", rating: 4.8, phone: "(352) 555-4455", desc: "Full solar systems • Battery backup • Free quotes"},
-            {name: "Prime Pool Service", service: "Pool Service", location: "The Villages", rating: 4.9, phone: "(352) 561-3610", desc: "Weekly cleaning • Repairs • No contract"},
-            {name: "Villages Landscaping Pros", service: "Landscaping & Lawn Care", location: "The Villages", rating: 4.7, phone: "(352) 555-5566", desc: "Mowing • Fertilization • Palm trimming"},
-            {name: "Senior Home Mods", service: "Senior Home Modifications", location: "The Villages", rating: 5.0, phone: "(352) 555-6677", desc: "Grab bars • Ramps • Walk-in showers"},
-            {name: "No Bug Zone", service: "Pest Control", location: "The Villages", rating: 4.6, phone: "(352) 555-7788", desc: "Mosquito • Rodents • One-time treatments"},
-            {name: "Power Pros Electric", service: "Electrical & Generator Install", location: "The Villages", rating: 4.9, phone: "(352) 555-8899", desc: "Panel upgrades • Whole-home generators"},
-            {name: "Roof Guardians", service: "Roofing", location: "The Villages", rating: 4.8, phone: "(352) 555-9900", desc: "Storm repairs • Preventative maintenance"},
-            {name: "Villages Pressure Washing", service: "Pressure Washing", location: "The Villages", rating: 4.7, phone: "(352) 555-1122", desc: "Driveways • Roofs • House exterior"},
-            {name: "Golf Cart Garage", service: "Golf Cart Repair", location: "The Villages", rating: 4.9, phone: "(352) 555-2233", desc: "Batteries • Tires • Full service"},
-            {name: "Bright Side Painting", service: "Interior & Exterior Painting", location: "The Villages", rating: 4.8, phone: "(352) 555-3344", desc: "Homes • Garages • Senior-friendly crews"},
-            {name: "Appliance Heroes", service: "Appliance Repair", location: "The Villages", rating: 4.7, phone: "(352) 555-4455", desc: "Fridges • Washers • Ovens • Same-day"},
-            {name: "Gutter Masters", service: "Gutter Cleaning & Repair", location: "The Villages", rating: 4.8, phone: "(352) 555-5566", desc: "Cleaning • Guards • Downspouts"},
-            {name: "Villages Security Pros", service: "Home Security Systems", location: "The Villages", rating: 4.9, phone: "(352) 555-6677", desc: "Cameras • Alarms • Smart locks"},
-            {name: "Everything Handyman", service: "Handyman Services", location: "The Villages", rating: 4.8, phone: "(352) 555-7788", desc: "One call does it all"},
-            {name: "Maverick Pool Care", service: "Pool Service", location: "The Villages", rating: 4.8, phone: "(352) 809-5488", desc: "Chemical • Cleaning • Repairs"},
-            {name: "Villages Lawn Pros", service: "Landscaping", location: "The Villages", rating: 4.7, phone: "(352) 555-1122", desc: "Mowing • Fertilization • Irrigation"},
-            {name: "Senior Comfort Painting", service: "Painting", location: "The Villages", rating: 4.9, phone: "(352) 555-2233", desc: "Interior • Exterior • Senior discounts"},
-            {name: "Garage Door Pros", service: "Garage Door Repair", location: "The Villages", rating: 4.8, phone: "(352) 555-3344", desc: "Openers • Springs • Tracks"},
-            {name: "Villages Generator Co.", service: "Generator Installation", location: "The Villages", rating: 5.0, phone: "(352) 555-4455", desc: "Whole-home backup • Maintenance"},
-            {name: "Florida Appliance Repair", service: "Appliance Repair", location: "The Villages", rating: 4.7, phone: "(352) 555-5566", desc: "Washers • Dryers • Refrigerators"}
-        ];
+  <script>
+    const listings = [
+      { name: "Tint The Villages", category: "Home & Commercial Window Tinting", desc: "Residential windows • Commercial • Lifetime warranty • Local favorite", location: "The Villages", phone: "(352) 638-7828", rating: 5 },
+      { name: "Frank Gay Services", category: "HVAC / Plumbing / Electrical", desc: "AC repair • Plumbing • Electrical • 24/7 emergency", location: "The Villages", phone: "(407) 512-8102", rating: 4.9 },
+      { name: "The Village Handyman Service", category: "Handyman Services", desc: "All repairs • Painting • Drywall • Senior discounts", location: "The Villages", phone: "(352) 399-8146", rating: 4.8 },
+      { name: "Advanced Pool Care", category: "Pool Service & Repair", desc: "Weekly cleaning • Repairs • Chemical service", location: "The Villages", phone: "(352) 399-8331", rating: 4.9 },
+      { name: "The Solar Guys", category: "Solar Installation & Pool Heating", desc: "Solar panels • Tubular skylights • Solar pool heating", location: "The Villages", phone: "(352) 555-1122", rating: 5 },
+      { name: "BugBusters Pest Control", category: "Pest Control", desc: "Monthly service • Termites • Ants • Pet-safe", location: "The Villages", phone: "(352) 555-5566", rating: 4.7 },
+      { name: "Alamo AC & Heating", category: "HVAC / AC Repair", desc: "Golf cart service • Same-day repairs • 20+ years", location: "The Villages", phone: "(352) 555-0123", rating: 4.9 },
+      { name: "Villages Plumbing Pros", category: "Plumbing", desc: "Emergency service • Leak detection • Senior discounts", location: "The Villages", phone: "(352) 555-0456", rating: 4.8 }
+    ];
 
-        function renderPros(filteredPros) {
-            const grid = document.getElementById('prosGrid');
-            grid.innerHTML = '';
-            filteredPros.forEach(pro => {
-                const div = document.createElement('div');
-                div.className = 'card bg-zinc-900 rounded-3xl p-6';
-                div.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h4 class="font-semibold text-xl">${pro.name}</h4>
-                            <p class="text-amber-400">${pro.service}</p>
-                        </div>
-                        <div class="text-right">
-                            <div class="flex text-sm">${Array(Math.floor(pro.rating)).fill('<span class="star">★</span>').join('')}</div>
-                            <span class="text-xs text-zinc-500">${pro.rating}</span>
-                        </div>
-                    </div>
-                    <p class="mt-4 text-zinc-400 text-sm">${pro.desc}</p>
-                    <p class="mt-4 text-xs text-zinc-500">${pro.location}</p>
-                    <a href="tel:${pro.phone}" class="block mt-6 text-center bg-amber-400 hover:bg-amber-500 text-black font-medium py-3 rounded-2xl text-sm">Call Now: ${pro.phone}</a>
-                `;
-                grid.appendChild(div);
-            });
-        }
+    function renderListings(filtered) {
+      const grid = document.getElementById('prosGrid');
+      grid.innerHTML = '';
+      filtered.forEach(l => {
+        const div = document.createElement('div');
+        div.className = 'card bg-zinc-900 p-6 rounded-3xl';
+        div.innerHTML = `
+          <h4 class="text-xl font-semibold">${l.name}</h4>
+          <p class="text-emerald-400">${l.category}</p>
+          <p class="text-zinc-400 text-sm mt-2">${l.desc}</p>
+          <p class="text-zinc-500 text-xs mt-4">${l.location}</p>
+          <button onclick="window.location='tel:${l.phone}'" class="mt-6 w-full bg-yellow-400 text-black font-bold py-3 rounded-2xl">Call Now: ${l.phone}</button>
+        `;
+        grid.appendChild(div);
+      });
+    }
 
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const filtered = pros.filter(p => 
-                p.name.toLowerCase().includes(term) || 
-                p.service.toLowerCase().includes(term) || 
-                p.desc.toLowerCase().includes(term)
-            );
-            renderPros(filtered.length ? filtered : pros);
-        });
+    renderListings(listings);
 
-        renderPros(pros);
-    </script>
-
-    <footer class="bg-black py-8 text-center text-xs text-zinc-500">
-        Villages Home Pros © 2026 • Made with AI in minutes • All pros are independent
-    </footer>
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      const filtered = listings.filter(l => 
+        l.name.toLowerCase().includes(term) || l.desc.toLowerCase().includes(term)
+      );
+      renderListings(filtered.length ? filtered : listings);
+    });
+  </script>
 </body>
 </html>
