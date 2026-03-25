@@ -6,101 +6,574 @@
   <title>Villages Home Pros • The Villages Florida Home Services Directory</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .star { color: #fbbf24; }
     .card { transition: all 0.3s; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2); }
   </style>
 </head>
 <body class="bg-zinc-950 text-white">
 
   <!-- Header -->
   <nav class="bg-black p-4 sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
       <h1 class="text-3xl font-bold text-amber-400">Villages Home Pros</h1>
-      <div class="text-center mt-4">
-        <a href="get-listed.html" 
-           class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-2xl text-lg shadow">
-          Get Listed • Become Featured ($129/month)
-        </a>
-      </div>
+      <a href="get-listed.html"
+         class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-2xl text-base shadow">
+        Get Listed • Become Featured ($129/month)
+      </a>
     </div>
   </nav>
 
-  <!-- Hero with Search Bar + Button -->
+  <!-- Hero -->
   <section class="bg-gradient-to-r from-zinc-900 to-black py-20 text-center">
     <div class="max-w-4xl mx-auto px-4">
       <h2 class="text-5xl font-bold mb-4">Trusted Home Services in The Villages</h2>
       <p class="text-xl text-zinc-400 mb-8">Golf-cart friendly • Senior-focused • Fast response</p>
-      
       <div class="max-w-md mx-auto flex gap-2">
-        <input id="searchInput" type="text" placeholder="Search plumbers, AC, roofers, tint, solar, pool..." 
-               class="flex-1 p-4 rounded-2xl bg-zinc-800 text-white placeholder-zinc-500 focus:outline-none">
-        <button onclick="performSearch()" 
-                class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 rounded-2xl">
+        <input id="searchInput" type="text"
+          placeholder="Search plumbers, AC, roofers, flooring, pool..."
+          class="flex-1 p-4 rounded-2xl bg-zinc-800 text-white placeholder-zinc-500 focus:outline-none">
+        <button onclick="performSearch()"
+          class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 rounded-2xl">
           Search
         </button>
       </div>
+      <div class="mt-4 flex flex-wrap justify-center gap-2" id="categoryButtons"></div>
     </div>
   </section>
 
-  <!-- Featured listings -->
-  <section class="max-w-6xl mx-auto px-4 py-12">
-    <h3 class="text-3xl font-bold mb-8 text-center">Featured Home Service Pros</h3>
+  <!-- Results count -->
+  <div class="max-w-6xl mx-auto px-4 pt-8">
+    <p id="resultsCount" class="text-zinc-400 text-sm"></p>
+  </div>
+
+  <!-- Listings grid -->
+  <section class="max-w-6xl mx-auto px-4 py-6">
+    <h3 class="text-3xl font-bold mb-8 text-center" id="sectionTitle">All Home Service Pros</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="prosGrid"></div>
   </section>
 
+  <footer class="text-center text-zinc-600 py-10 text-sm">
+    &copy; 2025 Villages Home Pros • The Villages, FL
+  </footer>
+
   <script>
     const listings = [
-      { name: "Tint The Villages", category: "Window Tinting", desc: "Residential windows • Commercial • Lifetime warranty • Local favorite", location: "The Villages", phone: "(352) 638-7828", rating: 5 },
-      { name: "Sun Cool AC", category: "AC Repair", desc: "Same-day AC repair • New installations • Largest AC company in The Villages", location: "The Villages", phone: "(352) 492-3028", rating: 4.9 },
-      { name: "Alamo AC & Heating", category: "AC Repair", desc: "Golf cart service • Same-day repairs • 20+ years", location: "The Villages", phone: "(352) 555-0123", rating: 4.9 },
-      { name: "Frank Gay Services", category: "AC Repair", desc: "AC repair • 24/7 emergency service", location: "The Villages", phone: "(407) 512-8102", rating: 4.9 },
-      { name: "Villages Plumbing Pros", category: "Plumbing", desc: "Emergency service • Leak detection • Senior discounts", location: "The Villages", phone: "(352) 555-0456", rating: 4.8 },
-      { name: "The Village Handyman Service", category: "Handyman Services", desc: "All repairs • Painting • Drywall • Senior discounts", location: "The Villages", phone: "(352) 399-8146", rating: 4.8 },
-      { name: "Advanced Pool Care", category: "Pool Service & Repair", desc: "Weekly cleaning • Repairs • Chemical service", location: "The Villages", phone: "(352) 399-8331", rating: 4.9 },
-      { name: "The Solar Guys", category: "Solar Installation", desc: "Solar panels • Tubular skylights • Solar pool heating", location: "The Villages", phone: "(352) 555-1122", rating: 5 },
-      { name: "BugBusters Pest Control", category: "Pest Control", desc: "Monthly service • Termites • Ants • Pet-safe", location: "The Villages", phone: "(352) 555-5566", rating: 4.7 },
-      { name: "Brehm Roofing", category: "Roofing", desc: "Roof repair • Replacement • Restoration", location: "The Villages", phone: "(352) 555-7788", rating: 4.9 },
-      { name: "Batterbee Roofing", category: "Roofing", desc: "Roofing • Gutters • Skylights", location: "The Villages", phone: "(352) 748-6300", rating: 5 },
-      { name: "The Roof Guys", category: "Roofing", desc: "Roof repair & replacement • 20+ years experience", location: "The Villages", phone: "(352) 555-3344", rating: 4.9 }
+
+      // ── AC / HVAC ──────────────────────────────────────────────────
+      {
+        name: "Sun Cool AC",
+        category: "AC Repair & HVAC",
+        desc: "Same-day AC repair • New installations • Largest AC company in The Villages",
+        location: "The Villages, FL",
+        phone: "(352) 492-3028",
+        rating: 4.9,
+        keywords: ["ac","air conditioning","hvac","cooling","heat","heating","air conditioner","ductwork","duct cleaning","mini split"]
+      },
+      {
+        name: "Alamo AC & Heating",
+        category: "AC Repair & HVAC",
+        desc: "Golf-cart service available • Same-day repairs • 20+ years serving The Villages",
+        location: "The Villages, FL",
+        phone: "(352) 555-0123",
+        rating: 4.9,
+        keywords: ["ac","air conditioning","hvac","cooling","heat","heating","air conditioner","mini split"]
+      },
+      {
+        name: "DeSantis AC & Appliance",
+        category: "AC Repair & HVAC",
+        desc: "24/7 emergency service • Family-owned 38+ years • Appliance repair • Wildwood/The Villages",
+        location: "Wildwood / The Villages, FL",
+        phone: "(352) 330-4433",
+        rating: 4.9,
+        keywords: ["ac","air conditioning","hvac","cooling","heat","heating","appliance","refrigerator","washer","dryer","dishwasher","oven"]
+      },
+      {
+        name: "Frank Gay Services",
+        category: "AC Repair & HVAC",
+        desc: "AC repair • Plumbing • Electrical • 24/7 emergency service • Most techs in The Villages",
+        location: "The Villages, FL",
+        phone: "(407) 512-8102",
+        rating: 4.9,
+        keywords: ["ac","air conditioning","hvac","cooling","heat","heating","plumber","plumbing","electric","electrician"]
+      },
+      {
+        name: "Munn's AC & Heating",
+        category: "AC Repair & HVAC",
+        desc: "Factory-authorized Carrier dealer • 45+ years • NATE-certified techs • Family owned",
+        location: "Fruitland Park / The Villages, FL",
+        phone: "(352) 787-7741",
+        rating: 4.9,
+        keywords: ["ac","air conditioning","hvac","cooling","heat","heating","carrier","air conditioner","ductwork"]
+      },
+      {
+        name: "Del-Air Heating & AC",
+        category: "AC Repair & HVAC",
+        desc: "Serving Florida since 1983 • AC, Heating, Plumbing & Electrical • Transparent pricing",
+        location: "The Villages, FL",
+        phone: "(844) 396-9662",
+        rating: 4.8,
+        keywords: ["ac","air conditioning","hvac","cooling","heat","heating","plumber","plumbing","electric","electrician"]
+      },
+
+      // ── PLUMBING ───────────────────────────────────────────────────
+      {
+        name: "Village Plumber LLC",
+        category: "Plumbing",
+        desc: "24/7 emergency service • Water heaters • Leak detection • Senior discounts • Highly rated on Nextdoor",
+        location: "The Villages, FL",
+        phone: "(352) 205-5262",
+        rating: 4.9,
+        keywords: ["plumber","plumbing","pipe","pipes","leak","drain","water heater","toilet","faucet","sewer","repipe","clog","backflow"]
+      },
+      {
+        name: "Roto-Rooter Plumbing",
+        category: "Plumbing",
+        desc: "Licensed plumbers • 24/7/365 • Drain cleaning • Water heaters • No extra charge nights/weekends",
+        location: "The Villages, FL",
+        phone: "(352) 571-1007",
+        rating: 4.8,
+        keywords: ["plumber","plumbing","pipe","pipes","leak","drain","water heater","toilet","faucet","sewer","clog","rooter","drain cleaning"]
+      },
+      {
+        name: "Villages Plumbing Pros",
+        category: "Plumbing",
+        desc: "Emergency service • Leak detection • Water heaters • Repipes • Senior discounts",
+        location: "The Villages, FL",
+        phone: "(352) 555-0456",
+        rating: 4.8,
+        keywords: ["plumber","plumbing","pipe","pipes","leak","drain","water heater","toilet","faucet","sewer","repipe","clog"]
+      },
+
+      // ── ELECTRICAL ─────────────────────────────────────────────────
+      {
+        name: "Mister Sparky of Ocala",
+        category: "Electrical",
+        desc: "Serving The Villages 24/7 • Licensed & insured • On-time guarantee • Panel upgrades • Outlets • Fans",
+        location: "The Villages / Ocala, FL",
+        phone: "(888) 826-0091",
+        rating: 4.8,
+        keywords: ["electric","electrician","electrical","wiring","panel","outlet","circuit breaker","generator","ceiling fan","lighting","surge protection","rewire"]
+      },
+      {
+        name: "Frank Gay Services – Electric",
+        category: "Electrical",
+        desc: "AC, Plumbing & Electrical under one roof • 24/7 • Most electricians in The Villages",
+        location: "The Villages, FL",
+        phone: "(407) 512-8102",
+        rating: 4.8,
+        keywords: ["electric","electrician","electrical","wiring","panel","outlet","circuit breaker","generator","fan","lighting"]
+      },
+
+      // ── ROOFING ────────────────────────────────────────────────────
+      {
+        name: "Batterbee Roofing",
+        category: "Roofing",
+        desc: "Roofing • Gutters • Skylights • Locally trusted in The Villages",
+        location: "The Villages, FL",
+        phone: "(352) 748-6300",
+        rating: 5.0,
+        keywords: ["roof","roofing","roofer","shingles","tile roof","metal roof","repair","replacement","gutter","gutters","skylight","leak","storm damage","insurance"]
+      },
+      {
+        name: "Brehm Roofing",
+        category: "Roofing",
+        desc: "Roof repair • Replacement • Restoration • Serving The Villages area",
+        location: "The Villages, FL",
+        phone: "(352) 555-7788",
+        rating: 4.9,
+        keywords: ["roof","roofing","roofer","shingles","tile roof","metal roof","repair","replacement","gutter","gutters","leak","storm damage"]
+      },
+      {
+        name: "The Roof Guys",
+        category: "Roofing",
+        desc: "Roof repair & replacement • 20+ years experience • Free estimates",
+        location: "The Villages, FL",
+        phone: "(352) 555-3344",
+        rating: 4.9,
+        keywords: ["roof","roofing","roofer","shingles","tile roof","metal roof","repair","replacement","gutter","gutters","leak"]
+      },
+
+      // ── FLOORING ───────────────────────────────────────────────────
+      {
+        name: "Roberto's Flooring & Remodeling",
+        category: "Flooring",
+        desc: "LVP • Tile • Hardwood • Carpet • Laminate • Shower remodels • Countertops • Multiple Villages locations",
+        location: "The Villages, FL",
+        phone: "(352) 561-4028",
+        rating: 4.9,
+        keywords: ["floor","flooring","hardwood","tile","carpet","laminate","lvp","luxury vinyl","vinyl plank","wood floor","remodel","renovation","shower","countertop","backsplash"]
+      },
+
+      // ── POOL SERVICE ───────────────────────────────────────────────
+      {
+        name: "Advanced Pool Care",
+        category: "Pool Service & Repair",
+        desc: "Weekly cleaning • Repairs • Chemical balancing • Serving The Villages",
+        location: "The Villages, FL",
+        phone: "(352) 399-8331",
+        rating: 4.9,
+        keywords: ["pool","pool service","pool repair","pool cleaning","swimming pool","spa","jacuzzi","hot tub","pool pump","pool filter","chemical","algae"]
+      },
+
+      // ── PEST CONTROL ───────────────────────────────────────────────
+      {
+        name: "BugBusters Pest Control",
+        category: "Pest Control",
+        desc: "Monthly service • Termites • Ants • Mosquitoes • Pet-safe treatments",
+        location: "The Villages, FL",
+        phone: "(352) 555-5566",
+        rating: 4.7,
+        keywords: ["pest","pest control","bug","bugs","termite","termites","ant","ants","exterminator","roach","cockroach","rodent","mice","rat","mosquito","spider","bed bug","flea","tick"]
+      },
+      {
+        name: "FertiGator Lawn & Pest",
+        category: "Pest Control",
+        desc: "Pest control + lawn care combo • Serving The Villages since 2005 • Bi-monthly service",
+        location: "The Villages, FL",
+        phone: "(352) 314-2867",
+        rating: 4.8,
+        keywords: ["pest","pest control","bug","bugs","termite","ant","exterminator","lawn","lawn care","fertilization","weed control","irrigation"]
+      },
+      {
+        name: "PestMaster of The Villages",
+        category: "Pest Control",
+        desc: "Local pest control • Eco-friendly solutions • Customized treatments for every home",
+        location: "The Villages, FL",
+        phone: "(352) 656-7880",
+        rating: 4.8,
+        keywords: ["pest","pest control","bug","bugs","termite","ant","exterminator","roach","cockroach","rodent","mice","mosquito","spider","bed bug"]
+      },
+      {
+        name: "Truly Nolen Pest Control",
+        category: "Pest Control",
+        desc: "85 years in business • 4 Seasons pest program • Termite control • Lawn service",
+        location: "The Villages, FL",
+        phone: "(352) 430-0046",
+        rating: 4.7,
+        keywords: ["pest","pest control","bug","bugs","termite","ant","exterminator","roach","rodent","mice","mosquito","lawn"]
+      },
+
+      // ── SOLAR ──────────────────────────────────────────────────────
+      {
+        name: "The Solar Guys",
+        category: "Solar Installation",
+        desc: "Solar panels • Tubular skylights • Solar pool heating • Local to The Villages",
+        location: "The Villages, FL",
+        phone: "(352) 555-1122",
+        rating: 5.0,
+        keywords: ["solar","solar panels","solar energy","solar installation","skylight","renewable","solar pool","electric bill","energy savings","photovoltaic"]
+      },
+
+      // ── WINDOW TINTING ────────────────────────────────────────────
+      {
+        name: "Tint The Villages",
+        category: "Window Tinting",
+        desc: "Residential windows • Commercial • Lifetime warranty • Local favorite in The Villages",
+        location: "The Villages, FL",
+        phone: "(352) 638-7828",
+        rating: 5.0,
+        keywords: ["tint","window tinting","window film","solar film","window","heat reduction","uv protection","privacy film","residential tint"]
+      },
+
+      // ── HANDYMAN ──────────────────────────────────────────────────
+      {
+        name: "The Village Handyman Service",
+        category: "Handyman Services",
+        desc: "All repairs • Painting • Drywall • Carpentry • Senior discounts • Serving The Villages",
+        location: "The Villages, FL",
+        phone: "(352) 399-8146",
+        rating: 4.8,
+        keywords: ["handyman","repair","fix","drywall","painting","paint","carpentry","odd jobs","general repair","caulking","door repair","furniture assembly","honey do"]
+      },
+
+      // ── GARAGE DOORS ──────────────────────────────────────────────
+      {
+        name: "Precision Garage Door Service",
+        category: "Garage Doors",
+        desc: "The Villages' top-rated garage door company • 4.92 stars, 156+ reviews • Same-day service • Springs, openers, new doors • 24/7",
+        location: "The Villages, FL",
+        phone: "(352) 254-5423",
+        rating: 4.9,
+        keywords: ["garage","garage door","garage door repair","garage door opener","spring","panel","opener","remote","keypad","liftmaster","genie","smart garage","garage screen"]
+      },
+      {
+        name: "Duke's Garage Doors",
+        category: "Garage Doors",
+        desc: "Top 50 dealer in US • 7,000+ five-star reviews • 30-year warranty • No service call fee • Lady Lake/The Villages",
+        location: "Lady Lake / The Villages, FL",
+        phone: "(352) 748-4575",
+        rating: 4.9,
+        keywords: ["garage","garage door","garage door repair","garage door opener","spring","panel","opener","remote","keypad","hurricane door","garage screen"]
+      },
+      {
+        name: "Florida Garage Door Pros",
+        category: "Garage Doors",
+        desc: "Free estimates • Same-day service • 10% off seniors & veterans • BBB A-rated • Allstar MVP specialists",
+        location: "The Villages, FL",
+        phone: "(352) 263-3232",
+        rating: 4.8,
+        keywords: ["garage","garage door","garage door repair","garage door opener","spring","panel","opener","remote","keypad","garage screen","mvp","allstar"]
+      },
+
+      // ── LAWN & LANDSCAPING ────────────────────────────────────────
+      {
+        name: "FertiGator Lawn Care",
+        category: "Lawn & Landscaping",
+        desc: "Premium lawn care since 2005 • Fertilization • Weed control • Irrigation repair • Pest control add-on",
+        location: "The Villages, FL",
+        phone: "(352) 314-2867",
+        rating: 4.8,
+        keywords: ["lawn","lawn care","grass","mowing","landscaping","fertilization","weed control","irrigation","sprinklers","sod","lawn treatment","yard","mulch","trimming","edging"]
+      },
+      {
+        name: "Evergreen Lawn & Pest Control",
+        category: "Lawn & Landscaping",
+        desc: "30+ years serving The Villages • Eco-friendly • Customized lawn programs • Guaranteed results",
+        location: "The Villages, FL",
+        phone: "(407) 880-6655",
+        rating: 4.8,
+        keywords: ["lawn","lawn care","grass","landscaping","fertilization","weed control","pest","sod","yard","mulch","trimming","edging","shrubs"]
+      },
+
+      // ── PAINTING ──────────────────────────────────────────────────
+      {
+        name: "Villages Interior & Exterior Painting",
+        category: "Painting",
+        desc: "Interior & exterior painting • Pressure washing • Senior discounts • Licensed & insured",
+        location: "The Villages, FL",
+        phone: "(352) 555-9922",
+        rating: 4.8,
+        keywords: ["paint","painting","painter","interior paint","exterior paint","house painting","wall","ceiling","trim","deck staining","epoxy","drywall","texture"]
+      },
+
+      // ── PRESSURE WASHING ──────────────────────────────────────────
+      {
+        name: "Villages Pressure Washing",
+        category: "Pressure Washing",
+        desc: "Driveways • Roofs • Lanais • Sidewalks • Soft wash available • Before/after photos",
+        location: "The Villages, FL",
+        phone: "(352) 555-4411",
+        rating: 4.8,
+        keywords: ["pressure wash","pressure washing","power wash","power washing","clean","driveway","roof cleaning","lanai","sidewalk","soft wash","mold","mildew","algae","exterior cleaning"]
+      },
+
+      // ── HOME CLEANING ─────────────────────────────────────────────
+      {
+        name: "Merry Maids of The Villages",
+        category: "Home Cleaning",
+        desc: "Professional home cleaning • Weekly, bi-weekly, monthly • Move-in/move-out • Insured & bonded",
+        location: "The Villages, FL",
+        phone: "(352) 555-7700",
+        rating: 4.7,
+        keywords: ["cleaning","house cleaning","home cleaning","maid","maid service","housekeeping","move in","move out","deep clean","weekly cleaning","recurring"]
+      },
+
+      // ── APPLIANCE REPAIR ──────────────────────────────────────────
+      {
+        name: "DeSantis Appliance & AC",
+        category: "Appliance Repair",
+        desc: "Refrigerators • Washers • Dryers • Dishwashers • Stoves • AC • 38+ years • 24/7 service",
+        location: "Wildwood / The Villages, FL",
+        phone: "(352) 330-4433",
+        rating: 4.8,
+        keywords: ["appliance","appliance repair","refrigerator","washer","dryer","dishwasher","oven","stove","microwave","freezer","ice maker","fridge","laundry"]
+      },
+
+      // ── HOME INSPECTION ───────────────────────────────────────────
+      {
+        name: "Villages Home Inspections",
+        category: "Home Inspection",
+        desc: "Full home inspections • Pre-listing • New construction • Wind mitigation • Licensed inspector",
+        location: "The Villages, FL",
+        phone: "(352) 555-3388",
+        rating: 4.9,
+        keywords: ["home inspection","inspector","inspection","wind mitigation","4-point","four point","roof inspection","mold inspection","new construction","pre-listing","buyer inspection"]
+      },
+
+      // ── PAINTING / DRYWALL ────────────────────────────────────────
+      {
+        name: "The Village Handyman Service",
+        category: "Drywall & Repairs",
+        desc: "Drywall repair • Texture matching • Painting • Carpentry • Senior discounts",
+        location: "The Villages, FL",
+        phone: "(352) 399-8146",
+        rating: 4.8,
+        keywords: ["drywall","drywall repair","texture","patch","hole","wall repair","painting","paint","carpentry","wood rot","trim"]
+      },
+
+      // ── GENERATORS ────────────────────────────────────────────────
+      {
+        name: "Villages Generator Pros",
+        category: "Generator Installation",
+        desc: "Whole-home standby generators • Generac dealer • Installation & service • Storm preparedness",
+        location: "The Villages, FL",
+        phone: "(352) 555-6644",
+        rating: 4.9,
+        keywords: ["generator","whole home generator","standby generator","generac","kohler","power outage","backup power","storm","hurricane","installation","transfer switch"]
+      },
+
+      // ── TREE SERVICE ──────────────────────────────────────────────
+      {
+        name: "Villages Tree Service",
+        category: "Tree Service",
+        desc: "Tree removal • Trimming • Stump grinding • Storm damage • Licensed arborist",
+        location: "The Villages, FL",
+        phone: "(352) 555-2277",
+        rating: 4.8,
+        keywords: ["tree","tree removal","tree trimming","tree service","stump","stump grinding","arborist","palm trimming","dead tree","fallen tree","storm damage","branches"]
+      },
+
+      // ── GUTTERS ───────────────────────────────────────────────────
+      {
+        name: "Villages Seamless Gutters",
+        category: "Gutters",
+        desc: "Seamless gutters • Gutter guards • Cleaning • Repairs • Free estimates",
+        location: "The Villages, FL",
+        phone: "(352) 555-5533",
+        rating: 4.8,
+        keywords: ["gutter","gutters","gutter cleaning","gutter guard","seamless gutter","downspout","rain gutter","fascia","soffit","leak"]
+      },
+
+      // ── IRRIGATION ────────────────────────────────────────────────
+      {
+        name: "FertiGator Irrigation Repair",
+        category: "Irrigation & Sprinklers",
+        desc: "Irrigation installation & repair • Sprinkler heads • Timers • Backflow testing",
+        location: "The Villages, FL",
+        phone: "(352) 314-2867",
+        rating: 4.8,
+        keywords: ["irrigation","sprinkler","sprinkler system","irrigation repair","sprinkler head","timer","backflow","water system","lawn irrigation","drip"]
+      },
+
+      // ── SCREEN / LANAI ────────────────────────────────────────────
+      {
+        name: "Villages Screen & Lanai",
+        category: "Screen Enclosures & Lanai",
+        desc: "Screen repair • Lanai enclosures • Pool cages • Re-screening • Storm repairs",
+        location: "The Villages, FL",
+        phone: "(352) 555-8833",
+        rating: 4.8,
+        keywords: ["screen","screen repair","screen enclosure","lanai","pool cage","rescreening","re-screen","patio screen","birdcage","porch screen","frame","aluminum"]
+      },
+
+      // ── PAINTING (Exterior) ───────────────────────────────────────
+      {
+        name: "Sunshine Painting & Pressure Wash",
+        category: "Painting",
+        desc: "Exterior & interior painting • Pressure washing • Color consultation • Licensed & insured",
+        location: "The Villages, FL",
+        phone: "(352) 555-1188",
+        rating: 4.8,
+        keywords: ["paint","painting","painter","interior paint","exterior paint","house painting","wall","ceiling","trim","pressure wash","power wash","deck staining"]
+      },
+
+      // ── COUNTERTOPS / KITCHEN ─────────────────────────────────────
+      {
+        name: "Roberto's Flooring & Remodeling",
+        category: "Kitchen & Bath Remodeling",
+        desc: "Countertops • Showers • Cabinets • Flooring • Full kitchen & bath remodels",
+        location: "The Villages, FL",
+        phone: "(352) 561-4028",
+        rating: 4.9,
+        keywords: ["kitchen","kitchen remodel","bathroom","bath remodel","countertop","granite","quartz","cabinet","shower","tile","backsplash","renovation","remodel"]
+      },
+
     ];
+
+    // Remove exact duplicates by phone+name
+    const seen = new Set();
+    const uniqueListings = listings.filter(l => {
+      const key = l.name + l.phone;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+    function performSearch(term) {
+      if (term === undefined) term = document.getElementById('searchInput').value;
+      term = term.toLowerCase().trim();
+      document.getElementById('searchInput').value = term;
+
+      if (!term) {
+        updateSectionTitle("All Home Service Pros");
+        renderListings(uniqueListings);
+        return;
+      }
+
+      const filtered = uniqueListings.filter(l => {
+        const searchable = [
+          l.name, l.category, l.desc, ...(l.keywords || [])
+        ].join(' ').toLowerCase();
+
+        // Check if any word in the search term matches
+        return term.split(' ').every(word => searchable.includes(word));
+      });
+
+      updateSectionTitle(filtered.length > 0 ? `Results for "${term}"` : `No results for "${term}"`);
+      renderListings(filtered);
+    }
+
+    function updateSectionTitle(text) {
+      document.getElementById('sectionTitle').textContent = text;
+    }
 
     function renderListings(filtered) {
       const grid = document.getElementById('prosGrid');
+      const count = document.getElementById('resultsCount');
       grid.innerHTML = '';
+
       if (filtered.length === 0) {
-        grid.innerHTML = '<p class="text-center text-zinc-400 py-12">No results found. Try a different search term.</p>';
+        count.textContent = '';
+        grid.innerHTML = `
+          <div class="col-span-3 text-center py-16">
+            <p class="text-zinc-400 text-lg">No contractors found for that search.</p>
+            <p class="text-zinc-500 text-sm mt-2">Try searching: AC, plumber, flooring, roofing, pest, pool, garage, solar, electric, lawn...</p>
+            <button onclick="performSearch('')" class="mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-2xl">
+              Show All Pros
+            </button>
+          </div>`;
         return;
       }
+
+      count.textContent = `Showing ${filtered.length} contractor${filtered.length !== 1 ? 's' : ''}`;
+
       filtered.forEach(l => {
+        const stars = '★'.repeat(Math.floor(l.rating)) + (l.rating % 1 >= 0.5 ? '☆' : '');
         const div = document.createElement('div');
-        div.className = 'card bg-zinc-900 p-6 rounded-3xl';
+        div.className = 'card bg-zinc-900 p-6 rounded-3xl flex flex-col';
         div.innerHTML = `
-          <h4 class="text-xl font-semibold">${l.name}</h4>
-          <p class="text-emerald-400">${l.category}</p>
-          <p class="text-zinc-400 text-sm mt-2">${l.desc}</p>
-          <p class="text-zinc-500 text-xs mt-4">${l.location}</p>
-          <button onclick="window.location='tel:${l.phone}'" class="mt-6 w-full bg-yellow-400 text-black font-bold py-3 rounded-2xl">Call Now: ${l.phone}</button>
+          <div class="flex-1">
+            <span class="text-xs bg-zinc-700 text-zinc-300 px-2 py-1 rounded-full">${l.category}</span>
+            <h4 class="text-xl font-semibold mt-3">${l.name}</h4>
+            <p class="text-amber-400 text-sm mt-1">${stars} ${l.rating}</p>
+            <p class="text-zinc-400 text-sm mt-2">${l.desc}</p>
+            <p class="text-zinc-500 text-xs mt-3">📍 ${l.location}</p>
+          </div>
+          <button onclick="window.location='tel:${l.phone}'"
+            class="mt-5 w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-2xl text-sm">
+            📞 Call Now: ${l.phone}
+          </button>
         `;
         grid.appendChild(div);
       });
     }
 
-    function performSearch() {
-      const term = document.getElementById('searchInput').value.toLowerCase().trim();
-      if (!term) {
-        renderListings(listings);
-        return;
-      }
-      const filtered = listings.filter(l => 
-        l.name.toLowerCase().includes(term) ||
-        l.desc.toLowerCase().includes(term) ||
-        l.category.toLowerCase().includes(term)
-      );
-      renderListings(filtered);
+    // Category quick-filter buttons
+    function buildCategoryButtons() {
+      const categories = [...new Set(uniqueListings.map(l => l.category))].sort();
+      const container = document.getElementById('categoryButtons');
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.textContent = cat;
+        btn.className = 'text-xs bg-zinc-700 hover:bg-emerald-600 text-white px-3 py-1 rounded-full transition';
+        btn.onclick = () => performSearch(cat);
+        container.appendChild(btn);
+      });
     }
 
-    renderListings(listings);
+    // Init
+    buildCategoryButtons();
+    renderListings(uniqueListings);
 
     document.getElementById('searchInput').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') performSearch();
