@@ -2,12 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="The Villages Florida Home Services Directory - Find trusted local pros for roofing, AC repair, plumbing, electrical, pool service & more. Call now for fast quotes in The Villages, FL.">
   <title>Villages Home Pros • The Villages Florida Home Services Directory</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .card { transition: all 0.3s; }
     .card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2); }
+    .featured-card { border: 2px solid #f59e0b; }
+    .featured-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body class="bg-zinc-950 text-white">
@@ -17,7 +31,7 @@
     <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
       <h1 class="text-3xl font-bold text-amber-400">Villages Home Pros</h1>
       <a href="get-listed.html"
-         class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-2xl text-base shadow">
+         class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-2xl text-lg shadow">
         Get Listed • Become Featured ($129/month)
       </a>
     </div>
@@ -27,13 +41,13 @@
   <section class="bg-gradient-to-r from-zinc-900 to-black py-20 text-center">
     <div class="max-w-4xl mx-auto px-4">
       <h2 class="text-5xl font-bold mb-4">Trusted Home Services in The Villages</h2>
-      <p class="text-xl text-zinc-400 mb-8">Golf-cart friendly • Senior-focused • Fast response</p>
+      <p class="text-2xl text-zinc-400 mb-8">Golf-cart friendly • Senior-focused • Fast response</p>
       <div class="max-w-md mx-auto flex gap-2">
         <input id="searchInput" type="text"
-          placeholder="Search plumbers, AC, roofers, flooring, pool..."
-          class="flex-1 p-4 rounded-2xl bg-zinc-800 text-white placeholder-zinc-500 focus:outline-none">
+          placeholder="Search plumbers, AC, roofers..."
+          class="flex-1 p-4 rounded-2xl bg-zinc-800 text-white text-lg placeholder-zinc-500 focus:outline-none">
         <button onclick="performSearch()"
-          class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 rounded-2xl">
+          class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 rounded-2xl text-lg">
           Search
         </button>
       </div>
@@ -43,7 +57,7 @@
 
   <!-- Results count -->
   <div class="max-w-6xl mx-auto px-4 pt-8">
-    <p id="resultsCount" class="text-zinc-400 text-sm"></p>
+    <p id="resultsCount" class="text-zinc-400 text-lg"></p>
   </div>
 
   <!-- Listings grid -->
@@ -52,12 +66,27 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="prosGrid"></div>
   </section>
 
-  <footer class="text-center text-zinc-600 py-10 text-sm">
+  <footer class="text-center text-zinc-500 py-10 text-base">
     &copy; 2025 Villages Home Pros • The Villages, FL
   </footer>
 
   <script>
     const listings = [
+
+      // ── FEATURED / PREMIUM MEMBERS (shown first) ──────────────────
+      // To add a featured member, set featured: true, add website and desc
+      // Example:
+      // {
+      //   name: "Example Business",
+      //   featured: true,
+      //   website: "https://www.examplebusiness.com",
+      //   category: "AC Repair & HVAC",
+      //   desc: "Short description under 150 characters.",
+      //   location: "The Villages, FL",
+      //   phone: "(352) 555-0000",
+      //   rating: 5.0,
+      //   keywords: ["ac","hvac"]
+      // },
 
       // ── AC / HVAC ──────────────────────────────────────────────────
       {
@@ -290,7 +319,7 @@
       {
         name: "Precision Garage Door Service",
         category: "Garage Doors",
-        desc: "The Villages' top-rated garage door company • 4.92 stars, 156+ reviews • Same-day service • Springs, openers, new doors • 24/7",
+        desc: "The Villages' top-rated garage door company • Same-day service • Springs, openers, new doors • 24/7",
         location: "The Villages, FL",
         phone: "(352) 254-5423",
         rating: 4.9,
@@ -308,11 +337,11 @@
       {
         name: "Florida Garage Door Pros",
         category: "Garage Doors",
-        desc: "Free estimates • Same-day service • 10% off seniors & veterans • BBB A-rated • Allstar MVP specialists",
+        desc: "Free estimates • Same-day service • 10% off seniors & veterans • BBB A-rated",
         location: "The Villages, FL",
         phone: "(352) 263-3232",
         rating: 4.8,
-        keywords: ["garage","garage door","garage door repair","garage door opener","spring","panel","opener","remote","keypad","garage screen","mvp","allstar"]
+        keywords: ["garage","garage door","garage door repair","garage door opener","spring","panel","opener","remote","keypad","garage screen"]
       },
 
       // ── LAWN & LANDSCAPING ────────────────────────────────────────
@@ -344,6 +373,15 @@
         phone: "(352) 555-9922",
         rating: 4.8,
         keywords: ["paint","painting","painter","interior paint","exterior paint","house painting","wall","ceiling","trim","deck staining","epoxy","drywall","texture"]
+      },
+      {
+        name: "Sunshine Painting & Pressure Wash",
+        category: "Painting",
+        desc: "Exterior & interior painting • Pressure washing • Color consultation • Licensed & insured",
+        location: "The Villages, FL",
+        phone: "(352) 555-1188",
+        rating: 4.8,
+        keywords: ["paint","painting","painter","interior paint","exterior paint","house painting","wall","ceiling","trim","pressure wash","power wash","deck staining"]
       },
 
       // ── PRESSURE WASHING ──────────────────────────────────────────
@@ -390,7 +428,7 @@
         keywords: ["home inspection","inspector","inspection","wind mitigation","4-point","four point","roof inspection","mold inspection","new construction","pre-listing","buyer inspection"]
       },
 
-      // ── PAINTING / DRYWALL ────────────────────────────────────────
+      // ── DRYWALL ────────────────────────────────────────────────────
       {
         name: "The Village Handyman Service",
         category: "Drywall & Repairs",
@@ -456,18 +494,7 @@
         keywords: ["screen","screen repair","screen enclosure","lanai","pool cage","rescreening","re-screen","patio screen","birdcage","porch screen","frame","aluminum"]
       },
 
-      // ── PAINTING (Exterior) ───────────────────────────────────────
-      {
-        name: "Sunshine Painting & Pressure Wash",
-        category: "Painting",
-        desc: "Exterior & interior painting • Pressure washing • Color consultation • Licensed & insured",
-        location: "The Villages, FL",
-        phone: "(352) 555-1188",
-        rating: 4.8,
-        keywords: ["paint","painting","painter","interior paint","exterior paint","house painting","wall","ceiling","trim","pressure wash","power wash","deck staining"]
-      },
-
-      // ── COUNTERTOPS / KITCHEN ─────────────────────────────────────
+      // ── KITCHEN & BATH ────────────────────────────────────────────
       {
         name: "Roberto's Flooring & Remodeling",
         category: "Kitchen & Bath Remodeling",
@@ -489,6 +516,13 @@
       return true;
     });
 
+    // Sort: featured first, then alphabetical
+    uniqueListings.sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return a.name.localeCompare(b.name);
+    });
+
     function performSearch(term) {
       if (term === undefined) term = document.getElementById('searchInput').value;
       term = term.toLowerCase().trim();
@@ -504,8 +538,6 @@
         const searchable = [
           l.name, l.category, l.desc, ...(l.keywords || [])
         ].join(' ').toLowerCase();
-
-        // Check if any word in the search term matches
         return term.split(' ').every(word => searchable.includes(word));
       });
 
@@ -526,9 +558,9 @@
         count.textContent = '';
         grid.innerHTML = `
           <div class="col-span-3 text-center py-16">
-            <p class="text-zinc-400 text-lg">No contractors found for that search.</p>
-            <p class="text-zinc-500 text-sm mt-2">Try searching: AC, plumber, flooring, roofing, pest, pool, garage, solar, electric, lawn...</p>
-            <button onclick="performSearch('')" class="mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-2xl">
+            <p class="text-zinc-400 text-xl">No contractors found for that search.</p>
+            <p class="text-zinc-500 text-base mt-2">Try searching: AC, plumber, flooring, roofing, pest, pool, garage, solar, electric, lawn...</p>
+            <button onclick="performSearch('')" class="mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-2xl text-lg">
               Show All Pros
             </button>
           </div>`;
@@ -540,38 +572,52 @@
       filtered.forEach(l => {
         const stars = '★'.repeat(Math.floor(l.rating)) + (l.rating % 1 >= 0.5 ? '☆' : '');
         const div = document.createElement('div');
-        div.className = 'card bg-zinc-900 p-6 rounded-3xl flex flex-col';
+
+        const featuredBadge = l.featured
+          ? `<span class="featured-badge">⭐ Featured</span>`
+          : '';
+
+        const websiteBtn = l.featured && l.website
+          ? `<a href="${l.website}" target="_blank"
+               class="mt-2 w-full block text-center bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 rounded-2xl text-base">
+               🌐 Visit Website
+             </a>`
+          : '';
+
+        div.className = `card ${l.featured ? 'featured-card' : ''} bg-zinc-900 p-6 rounded-3xl flex flex-col`;
         div.innerHTML = `
           <div class="flex-1">
-            <span class="text-xs bg-zinc-700 text-zinc-300 px-2 py-1 rounded-full">${l.category}</span>
-            <h4 class="text-xl font-semibold mt-3">${l.name}</h4>
-            <p class="text-amber-400 text-sm mt-1">${stars} ${l.rating}</p>
-            <p class="text-zinc-400 text-sm mt-2">${l.desc}</p>
-            <p class="text-zinc-500 text-xs mt-3">📍 ${l.location}</p>
+            <div class="flex items-center flex-wrap gap-1">
+              <span class="text-sm bg-zinc-700 text-zinc-300 px-3 py-1 rounded-full">${l.category}</span>
+              ${featuredBadge}
+            </div>
+            <h4 class="text-2xl font-semibold mt-3">${l.name}</h4>
+            <p class="text-amber-400 text-base mt-1">${stars} ${l.rating}</p>
+            <p class="text-zinc-300 text-base mt-2">${l.desc}</p>
+            <p class="text-zinc-500 text-sm mt-3">📍 ${l.location}</p>
           </div>
           <button onclick="window.location='tel:${l.phone}'"
-            class="mt-5 w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-2xl text-sm">
+            class="mt-5 w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-2xl text-lg">
             📞 Call Now: ${l.phone}
           </button>
+          ${websiteBtn}
         `;
         grid.appendChild(div);
       });
     }
 
-    // Category quick-filter buttons
     function buildCategoryButtons() {
       const categories = [...new Set(uniqueListings.map(l => l.category))].sort();
       const container = document.getElementById('categoryButtons');
       categories.forEach(cat => {
         const btn = document.createElement('button');
         btn.textContent = cat;
-        btn.className = 'text-xs bg-zinc-700 hover:bg-emerald-600 text-white px-3 py-1 rounded-full transition';
+        btn.className = 'text-sm bg-zinc-700 hover:bg-emerald-600 text-white px-4 py-2 rounded-full transition';
         btn.onclick = () => performSearch(cat);
         container.appendChild(btn);
       });
     }
 
-    // Init
     buildCategoryButtons();
     renderListings(uniqueListings);
 
