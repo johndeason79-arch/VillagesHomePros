@@ -41,7 +41,7 @@
   <section class="bg-gradient-to-r from-zinc-900 to-black py-20 text-center">
     <div class="max-w-4xl mx-auto px-4">
       <h2 class="text-5xl font-bold mb-4">Trusted Home Services in The Villages</h2>
-      <p class="text-2xl text-zinc-400 mb-8">Golf-cart friendly • Senior-focused • Fast response</p>
+      <p class="text-2xl text-zinc-400 mb-8">Community-Trusted Experts • Senior-Focused • Fast Response</p>
       <div class="max-w-md mx-auto flex gap-2">
         <input id="searchInput" type="text"
           placeholder="Search plumbers, AC, roofers..."
@@ -74,8 +74,6 @@
     const listings = [
 
       // ── FEATURED / PREMIUM MEMBERS (shown first) ──────────────────
-      // To add a featured member, set featured: true, add website and desc
-      // Example:
       // {
       //   name: "Example Business",
       //   featured: true,
@@ -507,7 +505,6 @@
 
     ];
 
-    // Remove exact duplicates by phone+name
     const seen = new Set();
     const uniqueListings = listings.filter(l => {
       const key = l.name + l.phone;
@@ -516,7 +513,6 @@
       return true;
     });
 
-    // Sort: featured first, then alphabetical
     uniqueListings.sort((a, b) => {
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
