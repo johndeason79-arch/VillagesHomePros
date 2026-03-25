@@ -1,6 +1,15 @@
 <div class="mt-8 p-6 bg-white rounded-2xl shadow border border-emerald-200 text-center">
   <h3 class="text-2xl font-bold text-emerald-700 mb-2">Ready to get featured?</h3>
   <p class="text-4xl font-bold text-emerald-600">$129<span class="text-lg font-normal">/month</span></p>
-  <p class="mt-4 text-gray-600">Send payment to <strong>info@villageshomepros.com</strong> via PayPal, Venmo, Cash App, or Zelle.</p>
-  <p class="mt-6 text-sm text-gray-500">Once I receive payment, your featured listing will be live within 24 hours.<br>No contracts • Cancel anytime</p>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="mt-4">
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="hidden" name="business" value="johndeason79@gmail.com">
+    <input type="hidden" name="currency_code" value="USD">
+    <input type="hidden" name="amount" value="129">
+    <input type="hidden" name="item_name" value="Villages Home Pros Featured Listing">
+    <button type="submit" style="background-color:#0070ba;color:white;padding:14px 28px;font-size:16px;font-weight:bold;border:none;border-radius:6px;cursor:pointer;">
+      💳 Pay Now with PayPal
+    </button>
+  </form>
+  <p class="mt-4 text-sm text-gray-500">Once I receive payment, your featured listing will be live within 24 hours.<br>No contracts • Cancel anytime</p>
 </div>
