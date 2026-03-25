@@ -1,15 +1,108 @@
-<div class="mt-8 p-6 bg-white rounded-2xl shadow border border-emerald-200 text-center">
-  <h3 class="text-2xl font-bold text-emerald-700 mb-2">Ready to get featured?</h3>
-  <p class="text-4xl font-bold text-emerald-600">$129<span class="text-lg font-normal">/month</span></p>
-  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="mt-4">
-    <input type="hidden" name="cmd" value="_xclick">
-    <input type="hidden" name="business" value="johndeason79@gmail.com">
-    <input type="hidden" name="currency_code" value="USD">
-    <input type="hidden" name="amount" value="129">
-    <input type="hidden" name="item_name" value="Villages Home Pros Featured Listing">
-    <button type="submit" style="background-color:#0070ba;color:white;padding:14px 28px;font-size:16px;font-weight:bold;border:none;border-radius:6px;cursor:pointer;">
-      💳 Pay Now with PayPal
-    </button>
-  </form>
-  <p class="mt-4 text-sm text-gray-500">Once I receive payment, your featured listing will be live within 24 hours.<br>No contracts • Cancel anytime</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get your home service business listed on Villages Home Pros - The Villages Florida's trusted directory. Become a featured pro for $129/month.">
+  <title>Get Listed • Villages Home Pros</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-950 text-white">
+
+  <!-- Header -->
+  <nav class="bg-black p-4 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
+      <a href="index.html" class="text-3xl font-bold text-amber-400">Villages Home Pros</a>
+      <a href="index.html"
+         class="inline-block bg-zinc-700 hover:bg-zinc-600 text-white font-bold px-6 py-3 rounded-2xl text-lg shadow">
+        ← Back to Directory
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-zinc-900 to-black py-16 text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-5xl font-bold mb-4 text-amber-400">Grow Your Business</h2>
+      <p class="text-2xl text-zinc-300">Reach thousands of homeowners in The Villages every month.</p>
+    </div>
+  </section>
+
+  <!-- Plans -->
+  <section class="max-w-5xl mx-auto px-4 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- Free Plan -->
+      <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700">
+        <h3 class="text-2xl font-bold text-white mb-2">Free Listing</h3>
+        <p class="text-5xl font-bold text-zinc-300 mb-6">$0<span class="text-xl font-normal">/month</span></p>
+        <ul class="space-y-4 text-zinc-300 text-lg mb-8">
+          <li>✅ Listed in the directory</li>
+          <li>✅ Searchable by category</li>
+          <li>✅ Phone number displayed</li>
+          <li>✅ Star rating shown</li>
+          <li class="text-zinc-500">❌ No featured badge</li>
+          <li class="text-zinc-500">❌ No website link</li>
+          <li class="text-zinc-500">❌ No business description</li>
+          <li class="text-zinc-500">❌ Not shown at top of results</li>
+        </ul>
+        <a href="index.html"
+           class="block text-center bg-zinc-700 hover:bg-zinc-600 text-white font-bold py-4 rounded-2xl text-lg">
+          View Directory
+        </a>
+      </div>
+
+      <!-- Featured Plan -->
+      <div class="bg-zinc-900 rounded-3xl p-8 border-2 border-amber-400 relative">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-amber-400 text-black font-bold px-6 py-1 rounded-full text-base">
+          ⭐ MOST POPULAR
+        </div>
+        <h3 class="text-2xl font-bold text-amber-400 mb-2">Featured Listing</h3>
+        <p class="text-5xl font-bold text-amber-400 mb-6">$129<span class="text-xl font-normal text-zinc-300">/month</span></p>
+        <ul class="space-y-4 text-zinc-300 text-lg mb-8">
+          <li>✅ Everything in Free</li>
+          <li>✅ <strong class="text-amber-400">⭐ Featured badge</strong> on your listing</li>
+          <li>✅ <strong class="text-white">Top of search results</strong> always</li>
+          <li>✅ <strong class="text-white">Your website link</strong> on your card</li>
+          <li>✅ <strong class="text-white">Business description</strong> (150 characters)</li>
+          <li>✅ <strong class="text-amber-400">Gold border</strong> so you stand out</li>
+          <li>✅ No contracts • Cancel anytime</li>
+        </ul>
+
+        <!-- PayPal Button -->
+        <div class="mt-8 text-center">
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="johndeason79@gmail.com">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="amount" value="129">
+            <input type="hidden" name="item_name" value="Villages Home Pros Featured Listing">
+            <button type="submit"
+              style="background-color:#0070ba;color:white;padding:16px 32px;font-size:18px;font-weight:bold;border:none;border-radius:12px;cursor:pointer;width:100%;">
+              💳 Pay Now with PayPal
+            </button>
+          </form>
+          <p class="mt-4 text-zinc-400 text-base">Once we receive your payment, we'll have your featured listing live within 24 hours.</p>
+          <p class="mt-2 text-zinc-500 text-base">No contracts • Cancel anytime</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Questions section -->
+  <section class="max-w-3xl mx-auto px-4 pb-16 text-center">
+    <h3 class="text-3xl font-bold mb-4">Questions?</h3>
+    <p class="text-zinc-400 text-xl mb-6">We're happy to help you get set up.</p>
+    <a href="mailto:johndeason79@gmail.com"
+       class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-4 rounded-2xl text-lg">
+      📧 Email Us
+    </a>
+  </section>
+
+  <footer class="text-center text-zinc-500 py-10 text-base">
+    &copy; 2025 Villages Home Pros • The Villages, FL
+  </footer>
+
+</body>
+</html>
