@@ -8,8 +8,8 @@
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "https://lirp.cdn-website.com/3fc6be3d/dms3rep/multi/opt/Tint+The+Villages+Logo700-350w.png",
-      "sizes": "192x192",
+      "src": "logo.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
