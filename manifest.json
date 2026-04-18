@@ -1,6 +1,6 @@
 {
   "name": "Villages Home Pros",
-  "short_name": "VHP",
+  "short_name": "Villages",
   "description": "The Villages Florida Home Services Directory",
   "start_url": "/index.html",
   "display": "standalone",
