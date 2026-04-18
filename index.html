@@ -92,17 +92,18 @@
     const listings = [
 
       // ── FEATURED / PREMIUM MEMBERS ────────────────────────────────
-      // {
-      //   name: "Example Business",
-      //   featured: true,
-      //   website: "https://www.examplebusiness.com",
-      //   category: "AC Repair & HVAC",
-      //   desc: "Short description.",
-      //   location: "The Villages, FL",
-      //   phone: "(352) 000-0000",
-      //   rating: 5.0,
-      //   keywords: ["ac","hvac"]
-      // },
+      {
+        name: "Tint The Villages",
+        featured: true,
+        website: "https://www.tintthevillages.com",
+        logo: "https://lirp.cdn-website.com/3fc6be3d/dms3rep/multi/opt/Tint+The+Villages+Logo700-350w.png",
+        category: "Window Tinting",
+        desc: "Residential windows • Commercial • Automotive • LLumar Authorized Dealer • Lifetime warranty • Local favorite in The Villages",
+        location: "The Villages, FL",
+        phone: "(352) 638-7828",
+        rating: 5.0,
+        keywords: ["tint","window tinting","window film","solar film","window","heat reduction","uv protection","privacy film","residential tint","commercial tint","auto tint","automotive tint","llumar"]
+      },
 
       // ── AC / HVAC ──────────────────────────────────────────────────
       {
@@ -317,15 +318,7 @@
       },
 
       // ── WINDOW TINTING ─────────────────────────────────────────────
-      {
-        name: "Tint The Villages",
-        category: "Window Tinting",
-        desc: "Residential windows • Commercial • Lifetime warranty • Local favorite in The Villages",
-        location: "The Villages, FL",
-        phone: "(352) 638-7828",
-        rating: 5.0,
-        keywords: ["tint","window tinting","window film","solar film","window","heat reduction","uv protection","privacy film","residential tint"]
-      },
+      // (Tint The Villages is now a Featured Member above)
 
       // ── SOLAR INSTALLATION ─────────────────────────────────────────
       {
@@ -840,6 +833,10 @@
           ? `<span class="featured-badge">⭐ Featured</span>`
           : '';
 
+        const logoImg = l.featured && l.logo
+          ? `<img src="${l.logo}" alt="${l.name} logo" class="h-16 object-contain mb-3 rounded-xl bg-white p-2">`
+          : '';
+
         const websiteBtn = l.featured && l.website
           ? `<a href="${l.website}" target="_blank"
                class="mt-2 w-full block text-center bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 rounded-2xl text-base">
@@ -850,6 +847,7 @@
         div.className = `card ${l.featured ? 'featured-card' : ''} bg-zinc-900 p-6 rounded-3xl flex flex-col`;
         div.innerHTML = `
           <div class="flex-1">
+            ${logoImg}
             <div class="flex items-center flex-wrap gap-1">
               <span class="text-sm bg-zinc-700 text-zinc-300 px-3 py-1 rounded-full">${l.category}</span>
               ${featuredBadge}
