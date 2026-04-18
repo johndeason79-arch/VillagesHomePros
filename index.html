@@ -13,6 +13,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="The Villages Florida Home Services Directory - Find local pros for roofing, AC repair, plumbing, electrical, pool service & more. Call now for fast quotes in The Villages, FL.">
   <title>Villages Home Pros • The Villages Florida Home Services Directory</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
@@ -31,9 +33,57 @@
       margin-left: 8px;
       vertical-align: middle;
     }
+    .hamburger-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 100;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .hamburger-menu.open { display: flex; }
+    #installBanner { display: none; }
   </style>
 </head>
 <body class="bg-zinc-950 text-white">
+
+  <!-- Hamburger Menu Overlay -->
+  <div class="hamburger-menu" id="mobileMenu">
+    <button onclick="toggleMenu()" class="absolute top-6 right-6 text-white text-4xl">&times;</button>
+    <a href="index.html" onclick="toggleMenu()" class="text-3xl font-bold text-amber-400">🏠 Home</a>
+    <a href="get-listed.html" onclick="toggleMenu()" class="text-3xl font-bold text-emerald-400">📋 Get Listed</a>
+    <a href="mailto:villageshomepros@gmail.com" onclick="toggleMenu()" class="text-3xl font-bold text-white">📧 Contact Us</a>
+  </div>
+
+  <!-- Add to Home Screen Banner -->
+  <div id="installBanner" class="bg-amber-500 text-black text-center py-3 px-4 text-base font-semibold">
+    📱 Add Villages Home Pros to your home screen!
+    <button onclick="showInstallInstructions()" class="ml-3 underline font-bold">How?</button>
+    <button onclick="document.getElementById('installBanner').style.display='none'" class="ml-3 text-black font-bold">✕</button>
+  </div>
+
+  <!-- Install Instructions Modal -->
+  <div id="installModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.9); z-index:200; align-items:center; justify-content:center;">
+    <div class="bg-zinc-900 rounded-3xl p-8 max-w-sm mx-4 text-center">
+      <h3 class="text-2xl font-bold text-amber-400 mb-4">Add to Home Screen</h3>
+      <div id="iosInstructions" style="display:none;">
+        <p class="text-zinc-300 text-lg mb-3">On iPhone:</p>
+        <p class="text-zinc-300">1. Tap the <strong>Share</strong> button (box with arrow) at the bottom of Safari</p>
+        <p class="text-zinc-300 mt-2">2. Scroll down and tap <strong>"Add to Home Screen"</strong></p>
+        <p class="text-zinc-300 mt-2">3. Tap <strong>Add</strong> -- done!</p>
+      </div>
+      <div id="androidInstructions" style="display:none;">
+        <p class="text-zinc-300 text-lg mb-3">On Android:</p>
+        <p class="text-zinc-300">1. Tap the <strong>three dots</strong> menu in Chrome</p>
+        <p class="text-zinc-300 mt-2">2. Tap <strong>"Add to Home Screen"</strong></p>
+        <p class="text-zinc-300 mt-2">3. Tap <strong>Add</strong> -- done!</p>
+      </div>
+      <button onclick="document.getElementById('installModal').style.display='none'" class="mt-6 bg-amber-500 text-black font-bold px-8 py-3 rounded-2xl text-lg">Got it!</button>
+    </div>
+  </div>
 
   <nav class="bg-black p-4 sticky top-0 z-50">
     <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
@@ -45,8 +95,9 @@
         </a>
         <a href="get-listed.html"
            class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-2xl text-lg shadow">
-          Get Listed • Become Featured ($129/month)
+          Get Listed • View Plans
         </a>
+        <button onclick="toggleMenu()" class="text-white text-3xl ml-2">&#9776;</button>
       </div>
     </div>
   </nav>
@@ -89,6 +140,34 @@
   </footer>
 
   <script>
+    // Hamburger menu
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    // Install banner
+    function showInstallInstructions() {
+      const modal = document.getElementById('installModal');
+      modal.style.display = 'flex';
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      document.getElementById('iosInstructions').style.display = isIOS ? 'block' : 'none';
+      document.getElementById('androidInstructions').style.display = isIOS ? 'none' : 'block';
+    }
+
+    // Show install banner after 5 seconds if not dismissed
+    setTimeout(() => {
+      const dismissed = localStorage.getItem('installBannerDismissed');
+      if (!dismissed) {
+        document.getElementById('installBanner').style.display = 'block';
+      }
+    }, 5000);
+
+    document.getElementById('installBanner').addEventListener('click', function(e) {
+      if (e.target.textContent === '✕') {
+        localStorage.setItem('installBannerDismissed', 'true');
+      }
+    });
+
     const listings = [
 
       // ── FEATURED / PREMIUM MEMBERS ────────────────────────────────
@@ -98,11 +177,11 @@
         website: "https://www.tintthevillages.com",
         logo: "https://lirp.cdn-website.com/3fc6be3d/dms3rep/multi/opt/Tint+The+Villages+Logo700-350w.png",
         category: "Window Tinting",
-        desc: "Residential windows • Commercial • Automotive • LLumar Authorized Dealer • Lifetime warranty • Local favorite in The Villages",
+        desc: "Residential windows • Commercial • LLumar Authorized Dealer • Lifetime warranty • Local favorite in The Villages",
         location: "The Villages, FL",
         phone: "(352) 638-7828",
         rating: 5.0,
-        keywords: ["tint","window tinting","window film","solar film","window","heat reduction","uv protection","privacy film","residential tint","commercial tint","auto tint","automotive tint","llumar"]
+        keywords: ["tint","window tinting","window film","solar film","window","heat reduction","uv protection","privacy film","residential tint","commercial tint","llumar"]
       },
 
       // ── AC / HVAC ──────────────────────────────────────────────────
